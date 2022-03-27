@@ -1,0 +1,46 @@
+{%  extends 'base.html' %}
+
+{% block content %}
+
+
+
+
+    
+    
+    <div class="card">
+        <div class="card-header">
+           <h1><strong>Venue</strong></h1> 
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{ venue}}</h5>
+          <p class="card-text">
+            <strong> Address:</strong> {{ venue.address }}<br>
+            <strong>Phone no:</strong> {{ venue.pnone}} </br> 
+                 
+            <strong>Zip code: </strong> {{ venue.zip_code}}</br> 
+            <strong>Email: </strong>{{ venue.email_address}}</br> 
+            <strong>Web: </strong><a href="{{ venue.web}}">{{ venue.web}}</a></br> 
+            <strong>Owner: </strong>{{ venue_owner}}</br> 
+            <strong>Owner Email: </strong>{{ venue_owner.email}}</br> 
+
+               
+            {% if venue.venue_image %}
+    
+              <img src="{{ venue.venue_image.url }}" width="150px" height="200px" >
+            {% endif %}
+          </p>
+          <br><br>
+          <h2>Upcoming events</h2>
+          {% if events %}
+              {%for event in events %}
+              <a href="{% url 'Show_event' event.id %}">{{event}}</a><br>
+            {% endfor %}<br>
+         {% else %}
+         No event at this venue presently
+         {% endif  %}
+        </div>
+        <br><br>
+      </div>
+     
+    
+{% endblock content %}

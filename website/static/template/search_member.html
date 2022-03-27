@@ -1,0 +1,58 @@
+{%  extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+ {% if searched %}
+
+        search for this {{searched}}
+ {% else %}
+        search event ...
+ {% endif %}
+    </div>
+    <div class="card-body">
+
+<form class="d-flex" method="POST" action="{% url 'search_member' %}">
+    {% csrf_token %}
+    <input class="form-control me-2" type="search" placeholder="Search Member" name="searched" aria-label="Search">
+    <button class="btn btn-outline-secondary" type="submit" >Search</button>
+  </form>
+</div>
+{{ member }}
+        {% for member in members %}
+        
+              <h5 class="card-title"><strong> Name:</strong> {{ member.name }}</h5>
+              <p class="card-text">
+                <ul>
+                    <strong>First Name:</strong> {{ member.fname }}</br> 
+                    <strong>Middle Name:</strong> {{ member.mdname }}</br> 
+                    <strong>Last Name:</strong> {{ member.lname }}</br>
+                    <strong>Email:</strong> {{ member.email }}</br>
+                    <strong>Phone:</strong> {{  member.phone }}</br>
+                    <strong>Age:</strong> {{  member.age }}</br> 
+                    <strong>Address:</strong>{{  member.address }}</br> 
+                           
+                     
+                </ul>
+           
+              </p>
+              
+            </div>
+            {% if user.is_authenticated %}
+            {% if user.is_superuser %}
+                <div class="card-footer text-muted" >
+                  <a href="{% url 'Update-member' member.id %}" class="btn btn-sm btn-secondary ">Update member</a>
+                  <a href="{% url 'delete-member' member.id %}" class="btn btn-sm btn-danger">Delete member</a>  
+                  
+                  
+                </div>
+              
+                {% endif  %}
+            {% endif  %}
+            
+          </div><br><br>
+
+
+        {% endfor %}
+
+{% endblock content %}

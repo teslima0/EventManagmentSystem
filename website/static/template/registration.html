@@ -1,0 +1,59 @@
+{%  extends 'base.html' %}
+{% block content %}
+<h1>Join our club today!!!</h1><br><br>
+<form action="{% url 'Regpage' %}" method="POST">
+    {% csrf_token %}
+    <div class="mb-3 row">
+        
+        <div class="col-sm-4">
+          <input type="text" class="form-control"  placeholder="First name" name="fname" value="{{fname}}">
+        </div>
+
+        <div class="col-sm-4">
+            <input type="text" class="form-control"  placeholder="Middle name" name="mdname" value="{{mdname}}">
+          </div>
+          
+
+      </div>
+
+
+      <div class="mb-3 row">
+        <div class="col-sm-4">
+            <input type="text" class="form-control"  placeholder="Last name" name="lname" value="{{lname}}">
+          </div>
+
+        <div class="col-sm-4">
+          <input type="text" class="form-control"  placeholder="Age" name="age" value="{{age}}">
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        
+        <div class="col-sm-4">
+          <input type="text" class="form-control"  placeholder="Phone no" name="phone" value="{{phone}}">
+        </div>
+
+        <div class="col-sm-4">
+            <input type="text" class="form-control"  placeholder="address" name="address" value="{{address}}">
+          </div>
+      </div>
+         
+
+      <div class="mb-3 row">
+        
+        <div class="col-sm-4">
+       
+          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="email" value="{{email}}">
+        </div>
+
+        <div class="col-sm-4">
+            <input type="password" class="form-control" id="inputPassword" placeholder="password" name="passwd" value="{{passwd}}">
+          </div>
+      </div>
+
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary mb-3">Sign up</button>
+      </div>
+</form>
+{% endblock content %}
+

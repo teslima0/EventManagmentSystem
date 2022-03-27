@@ -1,0 +1,23 @@
+{%  extends 'base.html' %}
+{% block content %}
+{% if user.is_authenticated %}
+        <h1>Add Event!!!</h1><br><br>
+        {% if submitted %}
+            Your event was submitted successfully!!
+        {% else %}
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                
+
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary mb-3">Add Event</button>
+                        </div>
+                </form>
+            {% endif %}
+    {% else %}
+    You must <a  href="{% url 'loginpage'%}">login</a> first before you add event...
+
+{% endif %}
+{% endblock content %}
+

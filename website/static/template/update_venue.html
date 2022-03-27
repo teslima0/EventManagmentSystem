@@ -1,0 +1,29 @@
+{%  extends 'base.html' %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+ 
+            <h1>Update Venue</h1><br>
+            {{venue}}<br>
+
+            {% if submitted %}
+            Your added venue successfully!!
+            {% else %}
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                
+
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary mb-3">Add Venue</button>
+                        </div>
+                </form>
+            {% endif %}
+            
+    
+{% else %}
+    You must <a  href="{% url 'loginpage'%}">login</a> first before you add venue...
+
+{% endif %}
+{% endblock content %}

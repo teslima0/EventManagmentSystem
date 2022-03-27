@@ -1,0 +1,30 @@
+{%  extends 'base.html' %}
+{% block content %}
+{% if user.is_authenticated %}
+
+   {% if user.is_superuser %}
+     <h1>Update member's bio data!!!</h1><br><br>
+       
+        
+          <form action="" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                
+
+                       
+                <div class="col-auto">
+                        <button type="submit" class="btn btn-primary mb-3">update biodata</button>
+                        </div>
+          </form>
+      {% else %}
+                <h2> Access denied</h2>
+                <p>Only admin can update the bio data<br>
+        
+      {% endif %}
+    
+{% else %}
+                You must <a  href="{% url 'loginpage'%}">login</a> first before you add event...
+            
+{% endif %}
+{% endblock content %}
+

@@ -1,0 +1,101 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'homepage' %}">My Club</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+         
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Members
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              {% if user.is_authenticated %}
+                  <li><a class="dropdown-item" href="{% url 'Regpage'%}">Add Member</a></li>
+                  <li><a class="dropdown-item" href="{% url 'search_member'%}">Search Member</a></li>
+                  {% if user.is_superuser %}
+                  <li><a class="dropdown-item" href="{% url 'edit_member'%}">Update member biodata</a></li>
+                  {% endif %}
+              {% endif %}
+              <li><a class="dropdown-item" href="{% url 'ViewMembers'%}">Show Members</a></li>
+              
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Event
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="{% url 'eventpage'%}">All Event</a></li>
+              
+              {% if user.is_authenticated %}
+                  <li><a class="dropdown-item" href="{% url 'eventReg'%}">Add Event</a></li>
+                  <li><a class="dropdown-item" href="{% url 'my_events'%}">My Events</a></li>
+                  
+              {% endif %}
+              <li><a class="dropdown-item" href="{% url 'search_events'%}">Search Events</a></li>
+              
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Venue
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="{% url 'venueView'%}">Show Venue</a></li>
+              {% if user.is_authenticated %}
+                  <li><a class="dropdown-item" href="{% url 'venueReg'%}">Add venue</a></li>
+              {% endif %}
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Download Files
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="{% url 'venue_text'%}">Venue Text File</a></li>
+              <li><a class="dropdown-item" href="{% url 'venue_csv'%}">Venue CSV File</a></li>
+              
+            </ul> 
+          </li>
+        
+         {% if user.is_authenticated %}
+                {% if user.is_superuser %}
+                    <li class="nav-item"><a  href="{% url 'admin_approval'%}" class="nav-link">Admin </a></li>
+                {% endif %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'logout'%}">logout</a></li>
+                
+         {% else %}
+                <li class="nav-item"> <a class="nav-link" href="{% url 'loginpage'%}">login</a></li>
+                
+                <li class="nav-item"><a class="nav-link" href="{% url 'register_user'%}">Register</a></li>
+                
+         {% endif %}
+          <!--
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dropdown
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled">Disabled</a>
+          </li> -->
+        </ul>
+        <form class="d-flex" method="POST" action="{% url 'search_venue' %}">
+          {% csrf_token %}
+          <input class="form-control me-2" type="search" placeholder="Search venue" name="searched" aria-label="Search">
+          <button class="btn btn-outline-secondary" type="submit" >Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>

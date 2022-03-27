@@ -1,0 +1,96 @@
+ <!--
+        ID: {{user.id}}<br>
+        <form action="{% url 'venueReg' %}" method="POST">
+            {% csrf_token %}
+            <div class="mb-3 row">
+                
+                <div class="col-sm-4">
+                  <input type="text" class="form-control"  placeholder="Venue name" name="name" value="{{name}}">
+                </div>
+
+                <div class="col-sm-4">
+                    <input type="text" class="form-control"  placeholder="address" name="address" value="{{address}}">
+                  </div>
+                  
+
+              </div>
+
+
+              <div class="mb-3 row">
+                <div class="col-sm-4">
+                    <input type="text" class="form-control"  placeholder="Zip code" name="zip_code" value="{{zip_code}}">
+                  </div>
+
+                <div class="col-sm-4">
+                  <input type="text" class="form-control"  placeholder="Phone no " name="pnone" value="{{pnone}}">
+                </div>
+              </div>
+
+              <div class="mb-3 row">
+                
+                <div class="col-sm-4">
+                  <input type="url" class="form-control"  placeholder="Website" name="web" value="{{web}}">
+                </div>
+
+                <div class="col-sm-4">
+                    <input type="email" class="form-control"  placeholder="email" name="email_address" value="{{email_address}}">
+                  </div>
+              </div>
+                
+
+              <div class="col-auto">
+                <button type="submit" class="btn btn-primary mb-3">Add Venue</button>
+              </div>
+        </form>
+-->
+<form action="" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="mb-3 row">
+      
+      <div class="col-sm-4">
+        <input type="text" class="form-control"  placeholder="Venue name" name="name" value="{{name}}">
+      </div>
+
+      <div class="col-sm-4">
+          <input type="text" class="form-control"  placeholder="address" name="address" value={{address}}>
+        </div>
+        
+
+    </div>
+
+
+    <div class="mb-3 row">
+      <div class="col-sm-4">
+          <input type="text" class="form-control"  placeholder="Zip code" name="zip_code" value="{{zip_code}}">
+        </div>
+
+      <div class="col-sm-4">
+        <input type="text" class="form-control"  placeholder="Phone no " name="pnone" value="{{phone}}">
+      </div>
+    </div>
+
+    <div class="mb-3 row">
+      
+      <div class="col-sm-4">
+        <input type="url" class="form-control"  placeholder="Website" name="web" value="{{web}}">
+      </div>
+
+      <div class="col-sm-4">
+          <input type="email" class="form-control"  placeholder="email" name="email_address" value="{{email}}">
+        </div>
+    </div>
+      
+
+    <div class="col-auto">
+      <button type="submit" class="btn btn-outline-secondary btn-sm mb-3">Update Venue</button>
+    </div>
+</form>
+<h1>Members Database</h1>
+{% for item in all %}
+    Name: <strong>{{ item.fname }}  {{ item.lname }}</strong> <br>
+    Email: {{ item.email }}<br>
+    Phone:{{ item.phone }}<br>
+    Address: {{ item.address }}<br><br>
+    <hr>
+{% endfor %}
+<a href="{% url 'delete-event' event.id %}" class="btn btn-outline-danger btn-sm">Delete Event</a>  

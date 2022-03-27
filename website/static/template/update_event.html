@@ -1,0 +1,33 @@
+{%  extends 'base.html' %}
+{% block content %}
+{% if user.is_authenticated %}
+
+   {% if user == event.manager %}
+     <h1>Update Event!!!</h1><br><br>
+        Logged in User is {{user}}<br>
+        Event Manager: {{event.manager}}<br>
+        
+        
+          <form action="" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                
+
+                        <div class="col-auto">
+                        <button type="submit" class="btn btn-primary mb-3">update Event</button>
+                        </div>
+          </form>
+      {% else %}
+                <h2> Access denied</h2>
+                <p>Only the event's manager can  update the event</p>
+                Logged in User is {{user}}<br>
+                 Event Manager: {{event.manager}}<br>
+        
+      {% endif %}
+    
+{% else %}
+                You must <a  href="{% url 'loginpage'%}">login</a> first before you add event...
+            
+{% endif %}
+{% endblock content %}
+
